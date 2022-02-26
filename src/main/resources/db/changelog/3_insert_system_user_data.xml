@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="3" author="ramazan.karagoz">
+        <sql dbms="postgresql"
+             splitStatements="true"
+             stripComments="true">
+
+            INSERT INTO public.customer (id, email, password, name, surname, enabled, created_by, created_date,
+                                         last_modified_by, last_modified_date, deleted)
+            VALUES ('b80a68c2-2f9a-4875-acef-139d3ec529cf', 'user@readingisgood.com',
+                    '$2a$10$8.UnVuG9HHgffUDAlk8qfOuVGkqRzgVymGe07xd00DMxs.AQubh4a', 'user', 'user', true, null, null,
+                    null, null, DEFAULT);
+
+            INSERT INTO public.authorities (id, authority, customer_id, created_by, created_date, last_modified_by,
+                                            last_modified_date, deleted)
+            VALUES ('901c6a8f-8db8-41ab-a6e0-47aad33b00da', 'ROLE_USER', 'b80a68c2-2f9a-4875-acef-139d3ec529cf', null,
+                    null, null, null, DEFAULT)
+
+        </sql>
+    </changeSet>
+
+
+</databaseChangeLog>

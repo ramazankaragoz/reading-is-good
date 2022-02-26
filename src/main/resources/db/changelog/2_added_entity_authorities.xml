@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+    <changeSet id="2" author="ramazan.karagoz">
+        <createTable tableName="authorities">
+            <column name="id" type="uuid">
+                <constraints primaryKey="true" primaryKeyName="pk_authorities" nullable="false"/>
+            </column>
+
+            <column name="authority" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="customer_id" type="uuid">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="created_by" type="varchar(64)"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="last_modified_by" type="varchar(64)"/>
+            <column name="last_modified_date" type="timestamp"/>
+            <column defaultValueBoolean="false" name="deleted" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+
+
+        <addForeignKeyConstraint baseColumnNames="customer_id"
+                                 baseTableName="authorities"
+                                 constraintName="fk_authorities__customer_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="customer"/>
+
+        <createIndex indexName="ux_authorities__customer_id_authority"
+                     unique="true"
+                     tableName="authorities">
+            <column name="customer_id"/>
+            <column name="authority"/>
+        </createIndex>
+
+        <createIndex indexName="ix_authorities__customer" tableName="authorities">
+            <column name="customer_id"/>
+        </createIndex>
+
+    </changeSet>
+
+
+
+</databaseChangeLog>

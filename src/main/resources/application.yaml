@@ -1,0 +1,44 @@
+spring:
+  port: 8080
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:postgresql://localhost:5432/readingisgood
+    username: readingisgood
+    password:
+    hikari:
+      poolName: Hikari
+      auto-commit: false
+      minimumIdle: 5
+      maximumPoolSize: 20
+      idleTimeout: 30000
+      maxLifetime: 2000000
+      connectionTimeout: 30000
+  liquibase:
+    contexts: dev
+    enabled: true
+    change-log: "classpath:db/changelog/master.xml"
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+    enabled: true
+    disable-swagger-default-url: true
+  show-actuator: false
+
+
+logging:
+  level:
+    tigahealth.common.web.log.RequestLogUtils: TRACE
+    org.springframework.cache: TRACE
+    org.springframework.security: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE

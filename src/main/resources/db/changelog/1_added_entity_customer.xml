@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+    <changeSet id="1" author="ramazan.karagoz">
+        <createTable tableName="customer">
+            <column name="id" type="uuid">
+                <constraints primaryKey="true" primaryKeyName="pk_customer" nullable="false"/>
+            </column>
+
+            <column name="email" type="varchar(64)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="password" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="name" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="surname" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column defaultValueBoolean="true" name="enabled" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="created_by" type="varchar(64)"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="last_modified_by" type="varchar(64)"/>
+            <column name="last_modified_date" type="timestamp"/>
+            <column defaultValueBoolean="false" name="deleted" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+        <createIndex indexName="ux_customer__email"
+                     unique="true"
+                     tableName="customer">
+            <column name="email"/>
+        </createIndex>
+
+    </changeSet>
+
+
+
+</databaseChangeLog>
