@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+    <changeSet id="4" author="ramazan.karagoz">
+        <createTable tableName="book">
+            <column name="id" type="uuid">
+                <constraints primaryKey="true" primaryKeyName="pk_book" nullable="false"/>
+            </column>
+
+            <column name="name" type="varchar(64)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="author" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column defaultValue="0" name="price" type="double precision">
+                <constraints  nullable="false"/>
+            </column>
+
+            <column name="created_by" type="varchar(64)"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="last_modified_by" type="varchar(64)"/>
+            <column name="last_modified_date" type="timestamp"/>
+            <column defaultValueBoolean="false" name="deleted" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+        <createIndex indexName="ux_book__name"
+                     unique="true"
+                     tableName="book">
+            <column name="name"/>
+        </createIndex>
+
+    </changeSet>
+
+
+
+</databaseChangeLog>

@@ -19,6 +19,10 @@
     <include file="db/changelog/1_added_entity_customer.xml" relativeToChangelogFile="false"/>
     <include file="db/changelog/2_added_entity_authorities.xml" relativeToChangelogFile="false"/>
     <include file="db/changelog/3_insert_system_user_data.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/4_added_entity_book.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/5_added_entity_stock.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/6_added_entity_order.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/7_added_entity_order_detail.xml" relativeToChangelogFile="false"/>
 
 
 

@@ -13,8 +13,8 @@ import javax.persistence.*;
 @Table(name = "authorities")
 public class Authorities extends AbstractAuditBaseEntity{
 
-    @JoinColumn(name = "customer_id")
     @ManyToOne
+    @JoinColumn(name = "customer_id")
     private Customer customer;
 
     @Column(name = "authority",nullable = false)

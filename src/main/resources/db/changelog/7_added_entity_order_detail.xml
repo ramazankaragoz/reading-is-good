@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+    <changeSet id="7" author="ramazan.karagoz">
+        <createTable tableName="order_detail">
+            <column name="id" type="uuid">
+                <constraints primaryKey="true" primaryKeyName="pk_order_detail" nullable="false"/>
+            </column>
+
+            <column name="book_id" type="uuid">
+                <constraints nullable="false"/>
+            </column>
+
+            <column defaultValue="0" name="quantity" type="integer">
+                <constraints nullable="false"/>
+            </column>
+
+            <column defaultValue="0" name="amount" type="double precision">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="order_id" type="uuid">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="created_by" type="varchar(64)"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="last_modified_by" type="varchar(64)"/>
+            <column name="last_modified_date" type="timestamp"/>
+            <column defaultValueBoolean="false" name="deleted" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="book_id"
+                                 baseTableName="order_detail"
+                                 constraintName="fk_order_detail__book_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="book"/>
+
+        <addForeignKeyConstraint baseColumnNames="order_id"
+                                 baseTableName="order_detail"
+                                 constraintName="fk_order_detail__order_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="order"/>
+
+        <createIndex indexName="ux_order_detail__book_order"
+                     unique="true"
+                     tableName="order_detail">
+            <column name="order_id"/>
+            <column name="book_id"/>
+        </createIndex>
+
+        <createIndex indexName="ix_order_detail__book" tableName="order_detail">
+            <column name="book_id"/>
+        </createIndex>
+
+        <createIndex indexName="ix_order_detail__order" tableName="order_detail">
+            <column name="order_id"/>
+        </createIndex>
+
+    </changeSet>
+
+
+
+</databaseChangeLog>
