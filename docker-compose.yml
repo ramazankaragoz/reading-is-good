@@ -6,9 +6,10 @@ services:
     restart: always
     ports:
       - 5432:5432
-    network_mode: "host"
     healthcheck:
       test: "exit 0"
+    networks:
+      - backend
     environment:
       - POSTGRES_PASSWORD=
       - POSTGRES_USER=readingisgood
@@ -18,18 +19,16 @@ services:
   app:
     build: .
     image: reading-is-good
-    container_name: reading_is_good_api
     depends_on:
       - readingisgooddb
     ports:
       - 8080:8080
-    network_mode: "host"
-    hostname: 127.0.0.1
-    environment:
-      - POSTGRES_PASSWORD=
-      - POSTGRES_USER=readingisgood
-      - POSTGRES_DB=readingisgood
-      - POSTGRES_HOST_AUTH_METHOD=trust
+    networks:
+      - backend
     restart: always
     healthcheck:
       test: "exit 0"
+
+networks:
+  backend:
+    driver: bridge
