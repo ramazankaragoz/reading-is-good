@@ -26,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
-                .antMatchers("/customer/register/**","/swagger-ui/**")
+                .antMatchers("/api/customer/register/**","/swagger-ui/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
@@ -34,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic();
 
         httpSecurity.csrf()
-                .ignoringAntMatchers("/customer/register/**","/swagger-ui/**");
+                .ignoringAntMatchers("/api/customer/register/**","/swagger-ui/**");
 
         httpSecurity.headers()
                 .frameOptions()

@@ -6,9 +6,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/customer")
@@ -18,6 +18,11 @@ public class CustomerController {
 
     public CustomerController(CustomerService customerService) {
         this.customerService = customerService;
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<Customer> save(@RequestBody @Valid Customer customer){
+        return new ResponseEntity<>(customerService.save(customer),HttpStatus.CREATED);
     }
 
     @GetMapping
