@@ -24,7 +24,13 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(UserAlreadyExistException.class)
-    public final ResponseEntity<Object> handleCategoryAlreadyDefinedException(Exception ex, WebRequest req){
+    public final ResponseEntity<Object> handleUserAlreadyExistException(Exception ex, WebRequest req){
+        RestError exceptionResponse = new RestError(new Date(), ex.getMessage(), req.getDescription(false));
+        return new ResponseEntity<>(exceptionResponse,HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(BookAlreadyExistException.class)
+    public final ResponseEntity<Object> handleBookAlreadyExistException(Exception ex, WebRequest req){
         RestError exceptionResponse = new RestError(new Date(), ex.getMessage(), req.getDescription(false));
         return new ResponseEntity<>(exceptionResponse,HttpStatus.BAD_REQUEST);
     }

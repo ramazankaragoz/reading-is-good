@@ -3,6 +3,7 @@ package com.ramazan.readingisgood.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "stock")
+@Where(clause = "deleted=false")
 public class Stock extends AbstractAuditBaseEntity{
 
     @OneToOne

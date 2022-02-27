@@ -4,6 +4,7 @@ import com.ramazan.readingisgood.util.OrderStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -15,6 +16,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "order")
+@Where(clause = "deleted=false")
 public class Order extends AbstractAuditBaseEntity{
 
     @ManyToOne(cascade = CascadeType.ALL)
