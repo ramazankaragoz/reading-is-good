@@ -37,9 +37,30 @@ public class OpenApiConfig {
     }
 
     @Bean
-    public GroupedOpenApi identityOpenApi() {
+    public GroupedOpenApi customerOpenApi() {
         String[] paths = {"/api/customer/**"};
         return GroupedOpenApi.builder().group("Customer").pathsToMatch(paths)
+                .build();
+    }
+
+    @Bean
+    public GroupedOpenApi bookOpenApi() {
+        String[] paths = {"/api/book/**"};
+        return GroupedOpenApi.builder().group("Book").pathsToMatch(paths)
+                .build();
+    }
+
+    @Bean
+    public GroupedOpenApi statisticsOpenApi() {
+        String[] paths = {"/api/statistics/**"};
+        return GroupedOpenApi.builder().group("Statistics").pathsToMatch(paths)
+                .build();
+    }
+
+    @Bean
+    public GroupedOpenApi orderOpenApi() {
+        String[] paths = {"/api/order/**"};
+        return GroupedOpenApi.builder().group("Order").pathsToMatch(paths)
                 .build();
     }
 }

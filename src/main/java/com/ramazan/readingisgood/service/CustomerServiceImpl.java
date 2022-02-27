@@ -37,7 +37,7 @@ public class CustomerServiceImpl implements CustomerService{
 
         customer.setPassword(passwordEncoder.encode(customer.getPassword()));
 
-        Customer savedCustomer=customerRepository.save(customer);
+        var savedCustomer=customerRepository.save(customer);
 
         authoritiesRepository.save(new Authorities(savedCustomer,"ROLE_USER"));
 

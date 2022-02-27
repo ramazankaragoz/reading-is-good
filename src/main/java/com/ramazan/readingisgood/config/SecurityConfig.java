@@ -7,12 +7,14 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
 
+@EnableWebSecurity
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -25,20 +27,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeRequests()
+        httpSecurity.csrf().disable().authorizeRequests()
                 .antMatchers("/api/customer/register/**","/swagger-ui/**")
                 .permitAll()
                 .anyRequest()
-                .authenticated()
-                .and()
-                .httpBasic();
-
-        httpSecurity.csrf()
-                .ignoringAntMatchers("/api/customer/register/**","/swagger-ui/**");
-
-        httpSecurity.headers()
-                .frameOptions()
-                .sameOrigin();
+                .authenticated().and().httpBasic();
     }
 
     @Override
