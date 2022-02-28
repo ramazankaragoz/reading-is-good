@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
 
     <changeSet id="7" author="ramazan.karagoz">
-        <createTable tableName="order_detail">
+        <createTable tableName="book_order_detail">
             <column name="id" type="uuid">
                 <constraints primaryKey="true" primaryKeyName="pk_order_detail" nullable="false"/>
             </column>
@@ -37,29 +37,29 @@
         </createTable>
 
         <addForeignKeyConstraint baseColumnNames="book_id"
-                                 baseTableName="order_detail"
+                                 baseTableName="book_order_detail"
                                  constraintName="fk_order_detail__book_id"
                                  referencedColumnNames="id"
                                  referencedTableName="book"/>
 
         <addForeignKeyConstraint baseColumnNames="order_id"
-                                 baseTableName="order_detail"
+                                 baseTableName="book_order_detail"
                                  constraintName="fk_order_detail__order_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="order"/>
+                                 referencedTableName="book_order"/>
 
         <createIndex indexName="ux_order_detail__book_order"
                      unique="true"
-                     tableName="order_detail">
+                     tableName="book_order_detail">
             <column name="order_id"/>
             <column name="book_id"/>
         </createIndex>
 
-        <createIndex indexName="ix_order_detail__book" tableName="order_detail">
+        <createIndex indexName="ix_order_detail__book" tableName="book_order_detail">
             <column name="book_id"/>
         </createIndex>
 
-        <createIndex indexName="ix_order_detail__order" tableName="order_detail">
+        <createIndex indexName="ix_order_detail__order" tableName="book_order_detail">
             <column name="order_id"/>
         </createIndex>
 

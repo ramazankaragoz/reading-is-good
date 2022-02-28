@@ -2,7 +2,7 @@ package com.ramazan.readingisgood.service;
 
 import com.ramazan.readingisgood.entity.Authorities;
 import com.ramazan.readingisgood.entity.Customer;
-import com.ramazan.readingisgood.exception.UserAlreadyExistException;
+import com.ramazan.readingisgood.exception.CustomerAlreadyExistException;
 import com.ramazan.readingisgood.repository.AuthoritiesRepository;
 import com.ramazan.readingisgood.repository.CustomerRepository;
 import org.springframework.data.domain.Page;
@@ -32,7 +32,7 @@ public class CustomerServiceImpl implements CustomerService{
     public Customer save(Customer customer) {
 
         if (customerRepository.existsByEmail(customer.getEmail())){
-            throw new UserAlreadyExistException("A User is already registered with this email address.");
+            throw new CustomerAlreadyExistException("A Customer is already registered with this email address.");
         }
 
         customer.setPassword(passwordEncoder.encode(customer.getPassword()));

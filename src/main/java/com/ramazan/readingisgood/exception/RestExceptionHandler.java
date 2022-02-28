@@ -23,8 +23,8 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler(UserAlreadyExistException.class)
-    public final ResponseEntity<Object> handleUserAlreadyExistException(Exception ex, WebRequest req){
+    @ExceptionHandler(CustomerAlreadyExistException.class)
+    public final ResponseEntity<Object> handleCustomerAlreadyExistException(Exception ex, WebRequest req){
         RestError exceptionResponse = new RestError(new Date(), ex.getMessage(), req.getDescription(false));
         return new ResponseEntity<>(exceptionResponse,HttpStatus.BAD_REQUEST);
     }
@@ -43,6 +43,12 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(StockNotFoundException.class)
     public final ResponseEntity<Object> handleStockNotFoundException(Exception ex, WebRequest req){
+        RestError exceptionResponse = new RestError(new Date(), ex.getMessage(), req.getDescription(false));
+        return new ResponseEntity<>(exceptionResponse,HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(CustomerNotFoundException.class)
+    public final ResponseEntity<Object> handleCustomerNotFoundException(Exception ex, WebRequest req){
         RestError exceptionResponse = new RestError(new Date(), ex.getMessage(), req.getDescription(false));
         return new ResponseEntity<>(exceptionResponse,HttpStatus.NOT_FOUND);
     }

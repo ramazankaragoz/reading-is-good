@@ -1,16 +1,15 @@
 package com.ramazan.readingisgood.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "order_detail")
+@Table(name = "book_order_detail")
 public class OrderDetail extends AbstractAuditBaseEntity{
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -23,6 +22,30 @@ public class OrderDetail extends AbstractAuditBaseEntity{
     @Column(name = "amount",nullable = false)
     private Double amount;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
     private Order order;
+
+    @Override
+    public String toString() {
+        return "OrderDetail{" +
+                "book=" + book +
+                ", quantity=" + quantity +
+                ", amount=" + amount +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        OrderDetail that = (OrderDetail) o;
+        return Objects.equals(((OrderDetail) o).getId(), that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), id);
+    }
 }

@@ -2,7 +2,7 @@ package com.ramazan.readingisgood.integrationtest;
 
 import com.ramazan.readingisgood.controller.CustomerController;
 import com.ramazan.readingisgood.entity.Customer;
-import com.ramazan.readingisgood.exception.UserAlreadyExistException;
+import com.ramazan.readingisgood.exception.CustomerAlreadyExistException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -47,7 +47,7 @@ public class CustomerControllerIntegrationTest {
 
         customer.setEmail("user@readingisgood.com");
 
-        Assertions.assertThrows(UserAlreadyExistException.class,() -> {
+        Assertions.assertThrows(CustomerAlreadyExistException.class,() -> {
             customerController.save(customer);
         });
 

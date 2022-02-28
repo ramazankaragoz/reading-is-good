@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
 
     <changeSet id="6" author="ramazan.karagoz">
-        <createTable tableName="order">
+        <createTable tableName="book_order">
             <column name="id" type="uuid">
                 <constraints primaryKey="true" primaryKeyName="pk_order" nullable="false"/>
             </column>
@@ -39,12 +39,12 @@
         </createTable>
 
         <addForeignKeyConstraint baseColumnNames="customer_id"
-                                 baseTableName="order"
+                                 baseTableName="book_order"
                                  constraintName="fk_order__customer_id"
                                  referencedColumnNames="id"
                                  referencedTableName="customer"/>
 
-        <createIndex indexName="ix_order__customer" tableName="order">
+        <createIndex indexName="ix_order__customer" tableName="book_order">
             <column name="customer_id"/>
         </createIndex>
 
