@@ -1,5 +1,6 @@
 package com.ramazan.readingisgood.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.Where;
 
@@ -14,6 +15,10 @@ import javax.persistence.*;
 @Table(name = "stock")
 @Where(clause = "deleted=false")
 public class Stock extends AbstractAuditBaseEntity{
+
+    @JsonIgnore
+    @Version
+    private Integer version;
 
     @OneToOne
     @JoinColumn(name = "book_id")

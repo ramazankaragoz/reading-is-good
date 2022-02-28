@@ -28,14 +28,18 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book save(Book book,Integer quantity) {
+    public Book save(Book book, Integer quantity) {
 
         if (bookRepository.existsByAuthorAndName(book.getAuthor(), book.getName())) {
             throw new BookAlreadyExistException("The book already exists in the system.");
         }
 
-        var savedBook=bookRepository.save(book);
-        stockRepository.save(new Stock(savedBook,Boolean.TRUE,quantity));
+        var savedBook = bookRepository.save(book);
+        Stock stock = new Stock();
+        stock.setBook(savedBook);
+        stock.setIsAvailable(Boolean.TRUE);
+        stock.setQuantity(quantity);
+        stockRepository.save(stock);
         return savedBook;
     }
 
@@ -43,7 +47,7 @@ public class BookServiceImpl implements BookService {
     public Stock updateBookFromStock(UUID fkBookId, Integer quantity, StockOperation stockOperation) {
 
         var stock = stockRepository.findByBookId(fkBookId)
-                .orElseThrow(()->new StockNotFoundException("There are not enough books in stock for this transaction."));
+                .orElseThrow(() -> new StockNotFoundException("There are not enough books in stock for this transaction."));
 
         if (Objects.nonNull(stock.getId()) && StockOperation.REMOVE.equals(stockOperation)
                 && stock.getQuantity() < quantity) {

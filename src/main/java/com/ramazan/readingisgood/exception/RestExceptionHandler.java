@@ -1,6 +1,7 @@
 package com.ramazan.readingisgood.exception;
 
 
+import org.hibernate.dialect.lock.OptimisticEntityLockException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import javax.persistence.OptimisticLockException;
 import java.util.Date;
 
 @ControllerAdvice
@@ -20,6 +22,12 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(Exception.class)
     public final ResponseEntity<Object> handleAllExceptions(Exception ex, WebRequest req){
         RestError exceptionResponse = new RestError(new Date(), ex.getMessage(), req.getDescription(false));
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler({OptimisticEntityLockException.class, OptimisticLockException.class})
+    public final ResponseEntity<Object> handleOptimisticLockExceptions(Exception ex, WebRequest req){
+        RestError exceptionResponse = new RestError(new Date(), "There is a high demand for orders.Please try again.", req.getDescription(false));
         return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
