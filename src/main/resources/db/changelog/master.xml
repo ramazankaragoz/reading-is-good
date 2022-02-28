@@ -23,6 +23,7 @@
     <include file="db/changelog/5_added_entity_stock.xml" relativeToChangelogFile="false"/>
     <include file="db/changelog/6_added_entity_order.xml" relativeToChangelogFile="false"/>
     <include file="db/changelog/7_added_entity_order_detail.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/8_insert_book_order_stock_data.xml" relativeToChangelogFile="false"/>
 
 
 

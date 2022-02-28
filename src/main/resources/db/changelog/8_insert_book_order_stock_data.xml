@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="8" author="ramazan.karagoz">
+        <sql dbms="postgresql"
+             splitStatements="true"
+             stripComments="true">
+
+            INSERT INTO public.book (id, name, author, price, created_by, created_date, last_modified_by,
+                                     last_modified_date, deleted)
+            VALUES ('cd68dd7a-98d6-11ec-b909-0242ac120002', 'Improbable', 'Adam Fawer', 8.83, 'SYSTEM',
+                    '2022-02-28 23:28:32.434370', 'SYSTEM', '2022-02-28 23:28:32.434370', false);
+
+            INSERT INTO public.stock (id, book_id, version, available, quantity, created_by, created_date,
+                                      last_modified_by, last_modified_date, deleted)
+            VALUES ('51826068-98d7-11ec-b909-0242ac120002', 'cd68dd7a-98d6-11ec-b909-0242ac120002', 0, true, 100,
+                    'SYSTEM', '2022-02-28 23:26:52.274408', 'SYSTEM', '2022-02-28 23:31:33.300266', false);
+
+            INSERT INTO public.book_order (id, customer_id, order_status, total_amount, start_date, end_date,
+                                           created_by, created_date, last_modified_by, last_modified_date, deleted)
+            VALUES ('ebd57872-98d6-11ec-b909-0242ac120002', 'b80a68c2-2f9a-4875-acef-139d3ec529cf', 'FULFILLED', 441.5,
+                    '2022-02-28 23:29:47.217000', '2022-02-28 23:29:47.217000', 'SYSTEM', '2022-02-28 23:31:33.298675',
+                    'SYSTEM', '2022-02-28 23:31:33.298675', false);
+
+            INSERT INTO public.book_order_detail (id, book_id, quantity, amount, order_id, created_by, created_date,
+                                                  last_modified_by, last_modified_date, deleted)
+            VALUES ('963283be-98d7-11ec-b909-0242ac120002', 'cd68dd7a-98d6-11ec-b909-0242ac120002', 50, 441.5,
+                    'ebd57872-98d6-11ec-b909-0242ac120002', 'SYSTEM', '2022-02-28 23:31:33.299736', 'SYSTEM',
+                    '2022-02-28 23:31:33.299736', false);
+
+
+        </sql>
+    </changeSet>
+
+
+</databaseChangeLog>
