@@ -13,12 +13,15 @@ ReadingIsGood is an online books retail firm which operates only on the Internet
 -Spring security jdbc authentication
 -Audit Log is used for entity log
 
-email: user@readingisgood.com password: "pass" for authentication.
+email: user@readingisgood.com password: "pass" for authentication.you can create a new customer for authentication.Customer register is not secure.
 
 To start the application you have to do maven install and run docker-compose.yml.Since the integration test is developed, you can skip the test in maven.
 mvn install -Dmaven.test.skip=true
 I may add testcontainers to fix this in the future.
 
+# ER Diagram
+
+to get an idea
 
 ![image](https://user-images.githubusercontent.com/21217596/156067989-2af77a74-ede4-446c-9f46-1fa4eb168a34.png)
 
