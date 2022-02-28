@@ -13,10 +13,7 @@ import org.aspectj.weaver.ast.Or;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static java.util.stream.Collectors.groupingBy;
@@ -56,7 +53,7 @@ public class OrderServiceImpl implements OrderService {
 
         var totalAmount = calculateTotalAmount(orderDetailList);
 
-        if (OrderStatus.FULFILLED.equals(orderStatus)){
+        if (OrderStatus.FULFILLED.equals(orderStatus)) {
             decreaseStock(orderDetailList);
         }
 
@@ -78,9 +75,13 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order findById(UUID fkOrderId) {
-        Order result=orderRepository.findById(fkOrderId).orElseThrow(()->new OrderNotFoundException("Order not found."));
+        return orderRepository.findById(fkOrderId).orElseThrow(() -> new OrderNotFoundException("Order not found."));
+    }
 
-        return result;
+    @Override
+    public List<Order> findBetweenByStartDateAndEndDate(Date endDate, Date startDate) {
+        return orderRepository.findAllByStartDateLessThanEqualAndEndDateGreaterThanEqual(endDate, startDate)
+                .orElseThrow(() -> new OrderNotFoundException("Order not found."));
     }
 
     private void decreaseStock(List<OrderDetail> orderDetailList) {

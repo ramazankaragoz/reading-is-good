@@ -1,6 +1,5 @@
 package com.ramazan.readingisgood.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ramazan.readingisgood.util.OrderStatus;
 import lombok.*;
@@ -11,7 +10,6 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 @Data
 @EqualsAndHashCode(callSuper = true,exclude = {"orderDetails"})
