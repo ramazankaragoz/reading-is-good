@@ -1,6 +1,7 @@
 package com.ramazan.readingisgood.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ramazan.readingisgood.util.OrderStatus;
 import lombok.*;
 import org.hibernate.annotations.Where;
@@ -13,6 +14,8 @@ import java.util.List;
 import java.util.Objects;
 
 @Data
+@EqualsAndHashCode(callSuper = true,exclude = {"orderDetails"})
+@ToString(callSuper = true,exclude = {"orderDetails"})
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -22,7 +25,6 @@ public class Order extends AbstractAuditBaseEntity{
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id")
-    @JsonIgnore
     private Customer customer;
 
     @NotNull
@@ -34,8 +36,8 @@ public class Order extends AbstractAuditBaseEntity{
     @Column(name = "total_amount",nullable = false)
     private Double totalAmount;
 
-    @NotNull
     @OneToMany(mappedBy = "order",fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<OrderDetail> orderDetails=new ArrayList<>(0);
 
     @NotNull
@@ -44,28 +46,4 @@ public class Order extends AbstractAuditBaseEntity{
 
     @Column(name = "end_date")
     private Date endDate;
-
-    @Override
-    public String toString() {
-        return "Order{" +
-                ", orderStatus=" + orderStatus +
-                ", totalAmount=" + totalAmount +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        Order order = (Order) o;
-        return id == order.getId();
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), id);
-    }
 }

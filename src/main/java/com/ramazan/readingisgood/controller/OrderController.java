@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/order")
@@ -25,5 +26,10 @@ public class OrderController {
     public ResponseEntity<Order> newOrder(@RequestBody @Valid CreateOrderDTO createOrderDTO,
                                           @PathVariable("orderStatus") @NotNull OrderStatus orderStatus){
         return new ResponseEntity<>(orderService.newOrder(createOrderDTO,orderStatus), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Order> findById(@PathVariable("id")UUID id){
+        return new ResponseEntity<>(orderService.findById(id), HttpStatus.OK);
     }
 }

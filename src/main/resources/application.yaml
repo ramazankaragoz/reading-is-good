@@ -36,7 +36,6 @@ springdoc:
 
 logging:
   level:
-    tigahealth.common.web.log.RequestLogUtils: TRACE
     org.springframework.cache: TRACE
     org.springframework.security: DEBUG
     org.hibernate.SQL: DEBUG

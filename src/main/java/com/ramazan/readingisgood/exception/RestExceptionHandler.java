@@ -53,6 +53,12 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(exceptionResponse,HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(OrderNotFoundException.class)
+    public final ResponseEntity<Object> handleOrderNotFoundException(Exception ex, WebRequest req){
+        RestError exceptionResponse = new RestError(new Date(), ex.getMessage(), req.getDescription(false));
+        return new ResponseEntity<>(exceptionResponse,HttpStatus.NOT_FOUND);
+    }
+
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request){
         RestError exceptionResponse = new RestError(new Date(),"Validation Failed.", ex.getBindingResult().toString());

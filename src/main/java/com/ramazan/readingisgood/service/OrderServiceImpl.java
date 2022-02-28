@@ -6,12 +6,10 @@ import com.ramazan.readingisgood.entity.Book;
 import com.ramazan.readingisgood.entity.Order;
 import com.ramazan.readingisgood.entity.OrderDetail;
 import com.ramazan.readingisgood.entity.Stock;
-import com.ramazan.readingisgood.exception.BookNotFoundException;
-import com.ramazan.readingisgood.exception.CustomerNotFoundException;
-import com.ramazan.readingisgood.exception.StockInvalidQuantityException;
-import com.ramazan.readingisgood.exception.StockNotFoundException;
+import com.ramazan.readingisgood.exception.*;
 import com.ramazan.readingisgood.repository.*;
 import com.ramazan.readingisgood.util.OrderStatus;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -76,6 +74,13 @@ public class OrderServiceImpl implements OrderService {
         orderDetailRepository.saveAll(orderDetailList);
 
         return order;
+    }
+
+    @Override
+    public Order findById(UUID fkOrderId) {
+        Order result=orderRepository.findById(fkOrderId).orElseThrow(()->new OrderNotFoundException("Order not found."));
+
+        return result;
     }
 
     private void decreaseStock(List<OrderDetail> orderDetailList) {

@@ -1,11 +1,14 @@
 package com.ramazan.readingisgood.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.Objects;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -23,29 +26,8 @@ public class OrderDetail extends AbstractAuditBaseEntity{
     private Double amount;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @JsonBackReference
     private Order order;
-
-    @Override
-    public String toString() {
-        return "OrderDetail{" +
-                "book=" + book +
-                ", quantity=" + quantity +
-                ", amount=" + amount +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        OrderDetail that = (OrderDetail) o;
-        return Objects.equals(((OrderDetail) o).getId(), that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), id);
-    }
 }
