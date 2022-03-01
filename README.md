@@ -15,7 +15,7 @@ ReadingIsGood is an online books retail firm which operates only on the Internet
 
 http://localhost:8080/swagger-ui.html
 
-email: user@readingisgood.com password: "pass" for authentication.you can create a new customer for authentication.Customer register is not secure.
+email: user@readingisgood.com password: "pass" for authentication.you can create a new customer for jdbc authentication.Customer register is not secure.
 
 To start the application you have to do maven install and run docker-compose.yml.Since the integration test is developed, you can skip the test in maven.
 mvn install -Dmaven.test.skip=true
