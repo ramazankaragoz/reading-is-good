@@ -2,7 +2,7 @@ spring:
   port: 8080
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://localhost:5432/readingisgood
+    url: jdbc:postgresql://postgres:5432/readingisgood
     username: readingisgood
     password:
     hikari:
